@@ -1,0 +1,114 @@
+#!/bin/bash
+
+#
+# PROCESS      Start and stop the PROCESS daemon
+#
+###
+# chkconfig: 235 98 55
+# description: Starts and stops the PROCESS daemon
+###
+#
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Get config.
+
+JAVA_PATH=`which java`
+if [ -z "$JAVA_PATH" ]; then
+ echo ERROR: cannot start IMEI Tracking Service.
+ echo No JAVA found to run IMEI Tracking Service. Please ensure JAVA_HOME points to valid JDK installation.
+ echo
+ echo Press Enter to continue.
+ read IGNORE
+ exit 1
+fi
+
+prog=imei-tracker
+DAEMON=imei-tracker
+PROCESS=imei-tracker
+initdir=/etc/init.d
+OPTIONS=-Dprofile=PROCESS
+STARTUP_LOG=/var/log/wacli/startup_$PROCESS.log
+INSTALL_DIR=/opt/wacli/imei-tracker-current
+procArgs=""
+confArgs=$INSTALL_DIR/conf/service.properties
+function mkArgs(){
+FILE=$INSTALL_DIR/conf/service.properties
+APIGEE_USER=root
+while read line;do
+        procArgs+="-D"
+        procArgs+=$line
+        procArgs+=" "
+done < $FILE
+}
+
+
+
+function start() {
+   PROCIDQP=`ps -elf | grep -i imei-traker | grep -v wacli-imei-tracker | grep -v grep | awk '{print $4}' | xargs $1 | cut -d' ' -f1,1`
+	echo "Running PID $PROCIDQP"
+
+    if [ $PROCIDQP ]; then
+            echo -n "IMER Tracker is running"
+            exit 1
+    fi
+	mkArgs
+#    echo "run schema tool..."
+#    java -jar $INSTALL_DIR/schema-tool.jar $FILE
+	echo -n $"Starting $prog: "
+
+		runCmdLine="java -Xmx2g $procArgs -jar $INSTALL_DIR/mobile-location-tracker-1.0.0.jar $confArgs > $STARTUP_LOG 2>&1 &"
+        echo $runCmdLine
+
+	#check_status 1
+	daemon --user $APIGEE_USER java -Xmx2g -Dhibernate.temp.use_jdbc_metadata_defaults=false $procArgs -jar $INSTALL_DIR/mobile-location-tracker-1.0.0.jar $confArgs > $STARTUP_LOG 2>&1 &
+	sleep 10
+	exit 0
+	#check_status 2
+
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ] ; then
+		success "$prog startup"
+	else
+		failure "$prog startup"
+	fi
+
+}
+
+function stop() {
+        echo -n $"Stopping $prog: "
+        ps -ef | grep -i $prog | grep -v "grep" | awk '{print $2}' | sudo xargs kill -9
+
+}
+
+
+function status(){
+   PROCIDQP=`ps -elf | grep -i imei-tracker | grep -v wacli-imei-tracker | grep -v grep | awk '{print $4}' | xargs $1 | cut -d' ' -f1,1`
+
+    if [ $PROCIDQP ]; then
+            echo -n "IMEI Tracker is running"
+            exit 0
+    fi
+    exit 1
+
+}
+
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        status)
+                status
+                ;;
+
+        *)
+                echo $"Usage: $0 {start|stop}"
+                exit 1;
+                ;;
+
+esac
+exit

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>mobile-location-tracker</artifactId>
+        <groupId>com.wacli</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>imei-tracker-dist</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+
+    <properties>
+        <run_user>root</run_user>
+        <run_group>root</run_group>
+        <release>1.0.0</release>
+        <minor.version>1</minor.version>
+        <product.name>imei-tracker</product.name>
+        <package>${product.name}-${project.version}-${minor.version}</package>
+        <init.dir>/etc/init.d</init.dir>
+        <install.dir>/opt/wacli/${package}</install.dir>
+        <sym.install.dir>/opt/apigee/${product.name}-current</sym.install.dir>
+        <conf.dir>${install.dir}/conf</conf.dir>
+        <sym.conf.dir>${sym.install.dir}/conf</sym.conf.dir>
+        <bin.dir>${install.dir}/bin</bin.dir>
+        <sym.bin.dir>${sym.install.dir}/bin</sym.bin.dir>
+        <log.dir>/var/log/wacli/imei-tracker</log.dir>
+        <init.file>wacli-imei-tracker</init.file>
+        <etc.link>wacli-imei-tracker</etc.link>
+    </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <!--<version>2.0.1</version>-->
+                <version>2.1-alpha-3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <copyright>2016,Wacli</copyright>
+                    <group>Development</group>
+                    <description>IMEI Tracker</description>
+                    <defaultUsername>root</defaultUsername>
+                    <defaultGroupname>root</defaultGroupname>
+                    <defaultFilemode>640</defaultFilemode>
+                    <defaultDirmode>750</defaultDirmode>
+                    <autoRequires>false</autoRequires>
+                    <autoProvides>false</autoProvides>
+                    <needarch>noarch</needarch>
+                    <targetOS>linux</targetOS>
+                    <mappings>
+                        <!-- copy the actual artifact -->
+                        <mapping>
+                            <username>${run_user}</username>
+                            <groupname>${run_group}</groupname>
+                            <directory>${install.dir}</directory>
+                            <filemode>755</filemode>
+                            <sources>
+                                <source>
+                                    <location>../target/mobile-location-tracker-1.0.0.jar
+                                    </location>
+                                    <destination>mobile-location-tracker-1.0.0.jar</destination>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>${conf.dir}</directory>
+                            <username>${run_user}</username>
+                            <groupname>${run_group}</groupname>
+                            <filemode>755</filemode>
+                            <sources>
+                                <source>
+                                    <location>src/main/resources/conf/</location>
+                                </source>
+                            </sources>
+                        </mapping>
+
+                        <mapping>
+                            <directory>${bin.dir}</directory>
+                            <username>${run_user}</username>
+                            <groupname>${run_group}</groupname>
+                            <filemode>755</filemode>
+                            <sources>
+                                <source>
+                                    <location>src/main/resources/init</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>${install.dir}</directory>
+                            <username>${run_user}</username>
+                            <groupname>${run_group}</groupname>
+                            <filemode>755</filemode>
+                        </mapping>
+
+
+                        <!-- create log directory-->
+                        <mapping>
+                            <username>${run_user}</username>
+                            <groupname>${run_group}</groupname>
+                            <filemode>755</filemode>
+                            <directory>${log.dir}</directory>
+                        </mapping>
+
+
+                    </mappings>
+                    <preinstallScriptlet>
+                        <script>
+                            echo "Installing ${product.name}"
+
+                            <!--getent passwd ${run_user} > /dev/null-->
+                            <!--if [ $? -eq 0 ]; then-->
+                            <!--echo "User apigee exists, continue with installation"-->
+                            <!--else-->
+                            <!--echo "User apigee does not exist.."-->
+                            <!--echo "Creating user apigee"-->
+                            <!--useradd -m -d /home/apigee -s /sbin/nologin -c "Apigee software user" -u 900 -g 900 apigee-->
+                            <!--if [ $? -ne 0 ]; then-->
+                            <!--echo "User apigee could not be created, service will not function correctly"-->
+                            <!--fi-->
+                            <!--fi-->
+                        </script>
+                    </preinstallScriptlet>
+                    <postinstallScriptlet>
+                        <script>
+                            ln -sTf "${install.dir}" "${sym.install.dir}"
+                            chown -h ${run_user}.${run_group} "${sym.install.dir}"
+
+                            # create symlink to init
+                            ln -sTf "${sym.bin.dir}/${init.file}" "${init.dir}/${etc.link}"
+                            chown -h ${run_user}.${run_group} "${init.dir}/${etc.link}"
+                            chown -R ${run_user}.${run_group} "${install.dir}"
+
+                            chmod +x "${bin.dir}/${init.file}"
+                            for F in ${bin.dir}/${init.file}
+                            do
+                            chown ${run_user}.${run_group} $F
+                            done
+
+                            echo "Successfully installed ${product.name}"
+
+                        </script>
+
+                    </postinstallScriptlet>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
