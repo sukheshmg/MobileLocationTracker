@@ -20,7 +20,8 @@
         <release>1.0.0</release>
         <minor.version>1</minor.version>
         <product.name>imei-tracker</product.name>
-        <package>${product.name}-${project.version}-${minor.version}</package>
+        <!--<package>${product.name}-${project.version}-${minor.version}</package>-->
+        <package>${product.name}-${project.version}</package>
         <init.dir>/etc/init.d</init.dir>
         <install.dir>/opt/wacli/${package}</install.dir>
         <sym.install.dir>/opt/apigee/${product.name}-current</sym.install.dir>
