@@ -1,0 +1,34 @@
+spring.application.name: imei-tracker
+logging.file: system.log
+logging.path: /var/log/wacli/imei-tracker/
+logging.level: DEBUG
+spring:
+  cloud:
+      consul:
+        host: ${consul.host}
+        port: ${consul.port}
+        discovery:
+          instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+          preferIpAddress: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://${db.host}:${db.port}/imeitracker
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+logging:
+  level:
+    org.springframework.cloud.consul: DEBUG
