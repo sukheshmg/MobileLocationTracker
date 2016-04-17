@@ -115,7 +115,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.apigee.analytics.changerepo.com.wacli.mobilelocationtracker.imeitracker.boot.ChangeRepoServiceInit</mainClass>
+                            <mainClass>com.wacli.mobilelocationtracker.imeitracker.boot.ImeiTrackerServiceInit</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
