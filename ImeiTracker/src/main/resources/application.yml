@@ -18,8 +18,8 @@ spring:
       ddl-auto: update
   datasource:
     url: jdbc:postgresql://${db.host}:${db.port}/imeitracker
-    username: postgres
-    password:
+    username: imeitracker
+    password: naveen
     driver-class-name: org.postgresql.Driver
 endpoints:
   health:
