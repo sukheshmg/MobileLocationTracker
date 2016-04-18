@@ -6,7 +6,7 @@
 
     <groupId>com.wacli</groupId>
     <artifactId>mobile-location-tracker</artifactId>
-    <!--<packaging>pom</packaging>-->
+    <packaging>jar</packaging>
     <version>1.0.0</version>
     <!--<modules>-->
         <!--<module>ImeiTrackerDist</module>-->
@@ -107,11 +107,23 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                            <mainClass>com.wacli.mobilelocationtracker.imeitracker.boot.ImeiTrackerServiceInit</mainClass>
+                </configuration>
             </plugin>
 
             <!--<plugin>-->
                 <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--&lt;!&ndash;<groupId>spring-boot-maven-plugin</groupId>&ndash;&gt;-->
                 <!--<artifactId>maven-jar-plugin</artifactId>-->
+                <!--&lt;!&ndash;<artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
                 <!--<configuration>-->
                     <!--<archive>-->
                         <!--<manifest>-->

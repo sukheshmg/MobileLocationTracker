@@ -19,7 +19,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${db.host}:${db.port}/imeitracker
     username: postgres
-    password: postgres
+    password:
     driver-class-name: org.postgresql.Driver
 endpoints:
   health:
