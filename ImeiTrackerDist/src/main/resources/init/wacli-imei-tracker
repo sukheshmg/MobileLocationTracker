@@ -9,6 +9,9 @@
 ###
 #
 
+SYSTEMCTL_SKIP_REDIRECT=true
+export SYSTEMCTL_SKIP_REDIRECT
+
 # Source function library.
 . /etc/rc.d/init.d/functions
 
