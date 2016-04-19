@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by sukhesh on 16/04/16.
  */
 @Entity
-@Table(name = "imeilocation", schema = "imeitracker")
+@Table(name = "imeilocation")
 public class ImeiLocation {
 
     @Version

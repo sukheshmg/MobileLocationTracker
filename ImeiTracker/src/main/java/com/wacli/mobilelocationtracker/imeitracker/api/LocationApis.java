@@ -69,7 +69,11 @@ public class LocationApis {
 
 
     @RequestMapping(value = "location/{imei}")
-    public ImeiLocation setImeiLocation(@PathVariable("imei") String imei) {
+    public ImeiLocation getImeiLocation(@PathVariable("imei") String imei) {
+        List<ImeiLocation> res = repo.getLocationsOrderedByTime(imei, new PageRequest(0, 1));
+        if(res == null || res.size() == 0) {
+            return "{"message":"No location"}";
+        }
         return repo.getLocationsOrderedByTime(imei, new PageRequest(0, 1)).get(0);
     }
 }
