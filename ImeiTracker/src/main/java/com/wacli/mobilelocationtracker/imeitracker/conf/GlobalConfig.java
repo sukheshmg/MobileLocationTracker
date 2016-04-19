@@ -6,7 +6,7 @@ package com.wacli.mobilelocationtracker.imeitracker.conf;
 public enum GlobalConfig {
     INSTANCE;
 
-    private int servicePort = 8080;
+    private int servicePort = 80;
 
     public int getServicePort() {
         return servicePort;
