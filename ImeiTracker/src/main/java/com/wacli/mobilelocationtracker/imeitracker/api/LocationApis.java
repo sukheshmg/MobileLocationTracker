@@ -72,7 +72,7 @@ public class LocationApis {
     public ImeiLocation getImeiLocation(@PathVariable("imei") String imei) {
         List<ImeiLocation> res = repo.getLocationsOrderedByTime(imei, new PageRequest(0, 1));
         if(res == null || res.size() == 0) {
-            return "{"message":"No location"}";
+            return null;
         }
         return repo.getLocationsOrderedByTime(imei, new PageRequest(0, 1)).get(0);
     }
