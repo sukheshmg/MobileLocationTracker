@@ -68,7 +68,7 @@ public class LocationApis {
     }
 
 
-    @RequestMapping(value = "location/{imei}", RequestMethod.GET)
+    @RequestMapping(value = "location/{imei}", method = RequestMethod.GET)
     public ImeiLocation getImeiLocation(@PathVariable("imei") String imei) {
         List<ImeiLocation> res = repo.getLocationsOrderedByTime(imei, new PageRequest(0, 1));
         if(res == null || res.size() == 0) {
