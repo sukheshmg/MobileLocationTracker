@@ -32,7 +32,7 @@ public class LocationApis {
     @Autowired
     ImeiLocationRepo repo;
 
-    @RequestMapping(value = "location/put/{imei}", method = RequestMethod.POST)
+    @RequestMapping(value = "location/{imei}", method = RequestMethod.POST)
     public void setImeiLocation(@PathVariable("imei") String imei, @RequestParam("langitude") String langitude, @RequestParam("latitude") String latitude) throws ValidationException {
         logger.info("Setting location to {}, {} for imei {}", new Object[]{langitude, latitude, imei});
         ImeiLocation location = new ImeiLocation();
@@ -68,7 +68,7 @@ public class LocationApis {
     }
 
 
-    @RequestMapping(value = "location/{imei}")
+    @RequestMapping(value = "location/{imei}", RequestMethod.GET)
     public ImeiLocation getImeiLocation(@PathVariable("imei") String imei) {
         List<ImeiLocation> res = repo.getLocationsOrderedByTime(imei, new PageRequest(0, 1));
         if(res == null || res.size() == 0) {
