@@ -77,6 +77,23 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <repositories>
@@ -99,6 +116,8 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
+
+
     </dependencyManagement>
 
 
@@ -115,7 +134,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                            <mainClass>com.wacli.mobilelocationtracker.imeitracker.boot.ImeiTrackerServiceInit</mainClass>
+                            <mainClass>com.sukhesh.mobilelocationtracker.imeitracker.boot.ImeiTrackerServiceInit</mainClass>
                 </configuration>
             </plugin>
 
@@ -128,7 +147,7 @@
                     <!--<archive>-->
                         <!--<manifest>-->
                             <!--<addClasspath>true</addClasspath>-->
-                            <!--<mainClass>com.wacli.mobilelocationtracker.imeitracker.boot.ImeiTrackerServiceInit</mainClass>-->
+                            <!--<mainClass>ImeiTrackerServiceInit</mainClass>-->
                         <!--</manifest>-->
                     <!--</archive>-->
                 <!--</configuration>-->

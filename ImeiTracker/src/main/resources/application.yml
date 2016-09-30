@@ -1,6 +1,6 @@
 spring.application.name: imei-tracker
 logging.file: system.log
-logging.path: /var/log/wacli/imei-tracker/
+logging.path: /var/log/sukhesh/imei-tracker/
 logging.level: DEBUG
 spring:
   cloud:
@@ -17,9 +17,9 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://${db.host}:${db.port}/imeitracker
-    username: imeitracker
-    password: naveen
+    url: jdbc:postgresql://${db.host}:${db.port}/locationbasedpromotions
+    username: postgres
+    password: redhat
     driver-class-name: org.postgresql.Driver
 endpoints:
   health:

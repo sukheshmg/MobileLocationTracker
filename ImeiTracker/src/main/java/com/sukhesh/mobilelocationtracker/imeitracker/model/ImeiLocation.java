@@ -1,4 +1,4 @@
-package com.wacli.mobilelocationtracker.imeitracker.model;
+package com.sukhesh.mobilelocationtracker.imeitracker.model;
 
 import javax.persistence.*;
 import java.util.Date;

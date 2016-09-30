@@ -1,6 +1,6 @@
-package com.wacli.mobilelocationtracker.imeitracker.db;
+package com.sukhesh.mobilelocationtracker.imeitracker.db;
 
-import com.wacli.mobilelocationtracker.imeitracker.model.ImeiLocation;
+import com.sukhesh.mobilelocationtracker.imeitracker.model.ImeiLocation;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

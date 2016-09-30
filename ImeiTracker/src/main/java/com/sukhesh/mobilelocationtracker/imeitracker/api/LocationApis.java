@@ -1,9 +1,10 @@
-package com.wacli.mobilelocationtracker.imeitracker.api;
+package com.sukhesh.mobilelocationtracker.imeitracker.api;
 
-import com.wacli.mobilelocationtracker.imeitracker.db.ImeiLocationPersister;
-import com.wacli.mobilelocationtracker.imeitracker.db.ImeiLocationRepo;
-import com.wacli.mobilelocationtracker.imeitracker.model.ImeiLocation;
-import com.wacli.mobilelocationtracker.imeitracker.util.BeanLookupHelper;
+import com.sukhesh.mobilelocationtracker.imeitracker.act.api.ActManager;
+import com.sukhesh.mobilelocationtracker.imeitracker.act.impl.DeviceMovedAct;
+import com.sukhesh.mobilelocationtracker.imeitracker.db.ImeiLocationPersister;
+import com.sukhesh.mobilelocationtracker.imeitracker.model.ImeiLocation;
+import com.sukhesh.mobilelocationtracker.imeitracker.db.ImeiLocationRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
-import javax.xml.stream.Location;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "v1/imeitracker/")
+@RequestMapping(value = "v1/locationtracker/")
 @Component
 public class LocationApis {
     private static final Logger logger = LoggerFactory.getLogger(LocationApis.class);
@@ -32,25 +32,31 @@ public class LocationApis {
     @Autowired
     ImeiLocationRepo repo;
 
+    @Autowired
+    ActManager actManager;
+
     @RequestMapping(value = "location/{imei}", method = RequestMethod.POST)
-    public void setImeiLocation(@PathVariable("imei") String imei, @RequestParam("langitude") String langitude, @RequestParam("latitude") String latitude) throws ValidationException {
+    public void setImeiLocation(@PathVariable("imei") String imei, @RequestParam("langitude") Double langitude, @RequestParam("latitude") Double latitude) throws ValidationException {
         logger.info("Setting location to {}, {} for imei {}", new Object[]{langitude, latitude, imei});
         ImeiLocation location = new ImeiLocation();
         location.setImei(imei);
         double lang = 0.0;
         double lat = 0.0;
 
-        try {
-            lang = Double.parseDouble(langitude);
-        } catch (NumberFormatException e) {
-            throw new ValidationException("Could not read langitude");
-        }
+        lang = langitude;
+        lat = latitude;
 
-        try {
-            lat = Double.parseDouble(latitude);
-        } catch (NumberFormatException e) {
-            throw new ValidationException("Could not read latitude");
-        }
+//        try {
+//            lang = Double.parseDouble(langitude);
+//        } catch (NumberFormatException e) {
+//            throw new ValidationException("Could not read langitude");
+//        }
+//
+//        try {
+//            lat = Double.parseDouble(latitude);
+//        } catch (NumberFormatException e) {
+//            throw new ValidationException("Could not read latitude");
+//        }
 
         location.setLangitude(lang);
         location.setLatitude(lat);
@@ -65,6 +71,8 @@ public class LocationApis {
         } else {
             persister.save(location);
         }
+
+        actManager.sendAct(new DeviceMovedAct(location));
     }
 
 

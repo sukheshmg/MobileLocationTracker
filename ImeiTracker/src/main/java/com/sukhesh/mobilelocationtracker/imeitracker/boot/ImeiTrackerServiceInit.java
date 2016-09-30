@@ -1,15 +1,14 @@
-package com.wacli.mobilelocationtracker.imeitracker.boot;
+package com.sukhesh.mobilelocationtracker.imeitracker.boot;
 
 
-import com.wacli.mobilelocationtracker.imeitracker.conf.ConfigLoader;
-import com.wacli.mobilelocationtracker.imeitracker.conf.GlobalConfig;
-import com.wacli.mobilelocationtracker.imeitracker.util.BeanLookupHelper;
+import com.sukhesh.mobilelocationtracker.imeitracker.conf.ConfigLoader;
+import com.sukhesh.mobilelocationtracker.imeitracker.conf.GlobalConfig;
+import com.sukhesh.mobilelocationtracker.imeitracker.util.BeanLookupHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.EmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
 import org.springframework.boot.orm.jpa.EntityScan;
@@ -22,16 +21,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * Created by sukhesh on 16/04/16.
  */
 
-//@ComponentScan(basePackages = "com.wacli")
+//@ComponentScan(basePackages = "com.sukhesh")
 //@EnableAutoConfiguration
 //@SpringBootApplication
-//@EnableJpaRepositories(basePackages = "com.wacli")
-//@EntityScan(basePackages = "com.wacli")
-@ComponentScan(basePackages = "com.wacli")
+//@EnableJpaRepositories(basePackages = "com.sukhesh")
+//@EntityScan(basePackages = "com.sukhesh")
+@ComponentScan(basePackages = "com.sukhesh")
 @EnableAutoConfiguration
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.wacli")
-@EntityScan(basePackages = "com.wacli")
+@EnableJpaRepositories(basePackages = "com.sukhesh")
+@EntityScan(basePackages = "com.sukhesh")
 
 public class ImeiTrackerServiceInit {
     private static final Logger logger = LoggerFactory.getLogger(ImeiTrackerServiceInit.class);

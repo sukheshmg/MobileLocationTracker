@@ -1,4 +1,4 @@
-package com.wacli.mobilelocationtracker.imeitracker.conf;
+package com.sukhesh.mobilelocationtracker.imeitracker.conf;
 
 /**
  * Created by sukhesh on 16/04/16.

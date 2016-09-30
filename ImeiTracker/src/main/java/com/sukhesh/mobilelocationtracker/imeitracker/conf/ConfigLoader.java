@@ -1,4 +1,4 @@
-package com.wacli.mobilelocationtracker.imeitracker.conf;
+package com.sukhesh.mobilelocationtracker.imeitracker.conf;
 
 import java.lang.Integer;
 import java.lang.NumberFormatException;
