@@ -1,5 +1,6 @@
 package com.sukhesh.mobilelocationtracker.imeitracker.util;
 
+import com.sukhesh.mobilelocationtracker.imeitracker.act.api.ActManager;
 import com.sukhesh.mobilelocationtracker.imeitracker.db.EventPersister;
 import com.sukhesh.mobilelocationtracker.imeitracker.db.EventRepo;
 import com.sukhesh.mobilelocationtracker.imeitracker.db.ImeiLocationPersister;
@@ -40,5 +41,9 @@ public enum BeanLookupHelper {
 
     public ImeiLocationPersister getImeiLocationPersister() {
         return (ImeiLocationPersister) context.getBean("imeiLocationPersister");
+    }
+
+    public ActManager getActManager() {
+        return (ActManager) context.getBean("actManagerImpl");
     }
 }

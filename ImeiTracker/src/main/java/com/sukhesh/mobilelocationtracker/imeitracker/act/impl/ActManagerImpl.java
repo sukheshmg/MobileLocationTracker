@@ -22,6 +22,7 @@ public class ActManagerImpl implements ActManager{
 
     public ActManagerImpl() {
         subscribers.add(new DeviceMovedActSubscriber());
+        subscribers.add(new MessageReadyActSubscriber());
     }
 
     @Override

@@ -39,6 +39,8 @@ public class DeviceMovedActSubscriber implements ActSubscriber {
                 messageReadyToSendAct.setMessage(event.getMessage());
                 messageReadyToSendAct.setDeviceId(act.getLocation().getImei());
                 messageReadyToSendAct.setMessageId(UUID.randomUUID().toString());
+
+                BeanLookupHelper.INSTANCE.getActManager().sendAct(messageReadyToSendAct);
             }
         }
     }
