@@ -11,6 +11,10 @@ public class MessageSendFailedException extends Exception {
         this.message = message;
     }
 
+    public MessageSendFailedException(Exception e) {
+        super(e);
+    }
+
     public String getMessage() {
         return message;
     }

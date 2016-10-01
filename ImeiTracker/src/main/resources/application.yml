@@ -1,6 +1,6 @@
 spring.application.name: imei-tracker
 logging.file: system.log
-logging.path: /var/log/sukhesh/imei-tracker/
+logging.path: /tmp/
 logging.level: DEBUG
 spring:
   cloud:

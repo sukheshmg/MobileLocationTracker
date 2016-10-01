@@ -12,6 +12,7 @@ import com.sukhesh.mobilelocationtracker.imeitracker.util.GeoLocationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by sukhesh on 30/09/16.
@@ -34,6 +35,10 @@ public class DeviceMovedActSubscriber implements ActSubscriber {
         for(Event event:events) {
             if(GeoLocationHelper.isWithinRange(event, act.getLocation(), event.getRange())) {
                 System.out.println("Sending message " + event.getMessage() + " to " + act.getLocation().getImei());
+                MessageReadyToSendAct messageReadyToSendAct = new MessageReadyToSendAct();
+                messageReadyToSendAct.setMessage(event.getMessage());
+                messageReadyToSendAct.setDeviceId(act.getLocation().getImei());
+                messageReadyToSendAct.setMessageId(UUID.randomUUID().toString());
             }
         }
     }

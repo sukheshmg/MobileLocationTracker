@@ -12,15 +12,15 @@ public class MessageReadyToSendAct implements Act {
         return ActType.MESSAGE_READY_TO_SEND;
     }
 
-    private long messageId;
+    private String messageId;
     private String deviceId;
     private String message;
 
-    public long getMessageId() {
+    public String getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(long messageId) {
+    public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
 

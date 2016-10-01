@@ -10,7 +10,7 @@ public class Message {
     private Map<String, String> data = new HashMap<>();
     private String to;
 
-    public Message(long id, String message, String to) {
+    public Message(String id, String message, String to) {
         this.to = to;
         setNotification(message);
         setMessageId(id);
@@ -32,8 +32,8 @@ public class Message {
         return data.get("message");
     }
 
-    private void setMessageId(long id) {
-        data.put("id", id + "");
+    private void setMessageId(String id) {
+        data.put("id", id);
     }
 
     public long getMessageId() {

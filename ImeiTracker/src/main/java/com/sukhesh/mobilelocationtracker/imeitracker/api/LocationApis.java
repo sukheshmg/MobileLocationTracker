@@ -67,8 +67,10 @@ public class LocationApis {
 
         if(locations != null && locations.size() != 0) {
             /* change to UTC */
+            logger.info(imei + " already present. updating");
             persister.setLastSeenLocation(imei, lang, lat, new Date());
         } else {
+            logger.info("new id " + imei);
             persister.save(location);
         }
 
