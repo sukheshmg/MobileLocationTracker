@@ -15,6 +15,7 @@ public class MessageReadyToSendAct implements Act {
     private String messageId;
     private String deviceId;
     private String message;
+    private String eventName;
 
     public String getMessageId() {
         return messageId;
@@ -38,5 +39,13 @@ public class MessageReadyToSendAct implements Act {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 }

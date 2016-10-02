@@ -1,10 +1,7 @@
 package com.sukhesh.mobilelocationtracker.imeitracker.util;
 
 import com.sukhesh.mobilelocationtracker.imeitracker.act.api.ActManager;
-import com.sukhesh.mobilelocationtracker.imeitracker.db.EventPersister;
-import com.sukhesh.mobilelocationtracker.imeitracker.db.EventRepo;
-import com.sukhesh.mobilelocationtracker.imeitracker.db.ImeiLocationPersister;
-import com.sukhesh.mobilelocationtracker.imeitracker.db.ImeiLocationRepo;
+import com.sukhesh.mobilelocationtracker.imeitracker.db.*;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -45,5 +42,13 @@ public enum BeanLookupHelper {
 
     public ActManager getActManager() {
         return (ActManager) context.getBean("actManagerImpl");
+    }
+
+    public MessagePersister getMessagePersister() {
+        return (MessagePersister) context.getBean("messagePersister");
+    }
+
+    public MessageRepo getMessageRepo() {
+        return (MessageRepo) context.getBean("messageRepo");
     }
 }

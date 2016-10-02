@@ -65,7 +65,7 @@ public class FirebaseMessagingUtil {
     }
 
     public static void main(String[] args) throws MessageSendFailedException {
-        Message message = new Message("123", "testmessage", "f71svfztGFw:APA91bFDsk2frTBv117vx2vYTCKnMZHsWICHyGXFff__3SViModj2uvtjc8cbc206Q83U_bqC1-fG__4FKkainows9qVsCsQsfrUN1mXVGObbD09DUm9U8i_cYXn8Uv4ARyKXkslxURs");
+        Message message = new Message("123", "eventTest", "testIntuit", "dMCrqup_5Ms:APA91bEPVyTDW9J1ZtDD2CEn4H3goN4aLHi2nJJHZbnArxNYkMYwJye6-QuOUjI0g5AJTu6H6PoWO6oRhn2P7zoxHYrLjladSQhFKm_q5caZYUs6R1cIIknNZmkM_0Hz55-ASgsqfKZE");
         FirebaseMessagingUtil.sendMessage(message);
     }
 }
